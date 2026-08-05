@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <rect width="600" height="400" fill="#0d1117" rx="16"/>
+  <defs>
+    <linearGradient id="pbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a9d8f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e76f51;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect x="210" y="30" width="180" height="340" rx="24" fill="#161b22" stroke="url(#pbGrad)" stroke-width="3"/>
+  <rect x="240" y="60" width="120" height="20" rx="4" fill="#21262d"/>
+  <path d="M250 150 L300 100 L350 150 Z" fill="none" stroke="#e76f51" stroke-width="4"/>
+  <rect x="260" y="150" width="80" height="60" fill="#2a9d8f" opacity="0.3" stroke="#2a9d8f" stroke-width="2"/>
+  <rect x="230" y="230" width="140" height="36" rx="8" fill="url(#pbGrad)"/>
+  <text x="300" y="253" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">Inquire Project Lead</text>
+  <rect x="230" y="280" width="140" height="10" rx="5" fill="#30363d"/>
+  <rect x="230" y="298" width="90" height="10" rx="5" fill="#30363d"/>
+  <text x="300" y="388" font-family="sans-serif" font-size="13" font-weight="bold" fill="#8b949e" text-anchor="middle">PrimeBuilder - Construction App</text>
+</svg>

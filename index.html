@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Milan - Flutter Developer Portfolio</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- #MAIN -->
+  <main>
+
+    <!-- #SIDEBAR -->
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box" style="border-radius: 24px; overflow: hidden;">
+          <img id="sidebarAvatarImage" src="./assets/images/my-avatar.png" alt="Milan Boricha" width="90" style="filter: grayscale(0.2) contrast(1.1);" onerror="this.src='./assets/images/avatar-1.png'">
+        </figure>
+
+        <div class="info-content" style="text-align: center;">
+          <h1 id="sidebarNameText" class="name" title="Milan Boricha" style="font-size: 20px; font-weight: 600; margin-top: 10px;">Milan Boricha</h1>
+          <div id="sidebarRoleText" class="role-pill">Flutter Developer</div>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">EMAIL</p>
+              <a id="sidebarEmailLink" href="mailto:borichamilan792@gmail.com" class="contact-link">borichamilan792@gmail.com</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="call-outline"></ion-icon>
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">PHONE</p>
+              <a id="sidebarPhoneLink" href="tel:+918200121272" class="contact-link">+91 8200121272</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">LOCATION</p>
+              <address id="sidebarLocationText">Bhavnagar, Gujarat, India</address>
+            </div>
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="https://in.linkedin.com/in/milan-boricha-1143362b4" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://github.com/milan1533" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="mailto:borichamilan792@gmail.com" class="social-link" title="Email">
+              <ion-icon name="logo-google"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+        <a href="#" id="downloadCvSidebarBtn" target="_blank" download="Milan_Boricha_Resume.pdf" class="btn-download-cv" style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; padding: 10px 15px; background: linear-gradient(135deg, #ffdb70 0%, #e6c200 100%); color: #121212; font-weight: 600; border-radius: 12px; text-decoration: none; font-size: 13px; box-shadow: 0 4px 15px rgba(255, 219, 112, 0.2); transition: transform 0.2s;">
+          <ion-icon name="cloud-download-outline" style="font-size: 18px;"></ion-icon> Download Resume
+        </a>
+
+      </div>
+
+    </aside>
+
+
+    <!-- #MAIN-CONTENT -->
+    <div class="main-content">
+
+      <!-- #NAVBAR -->
+      <nav class="navbar">
+
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <button class="navbar-link active" data-nav-link data-nav-target="about">About</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link data-nav-target="resume">Resume</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link data-nav-target="portfolio">Portfolio</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link data-nav-target="blog">Blog</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link data-nav-target="contact">Contact</button>
+          </li>
+
+        </ul>
+
+      </nav>
+
+
+      <!-- #ABOUT -->
+      <article class="about active" data-page="about">
+
+        <header>
+          <h2 class="h2 article-title">About Me</h2>
+        </header>
+
+        <section class="about-text" id="aboutBioText">
+          <p>
+            Flutter Developer and B.Tech Computer Engineering student with hands-on knowledge of Flutter, Dart, Firebase, SQLite, Hive, REST APIs, Provider, and BLoC. Passionate about building scalable cross-platform mobile applications and seeking a Flutter Developer Internship to apply my skills and contribute to real-world projects.
+          </p>
+
+          <p>
+            Proven track record in delivering cutting-edge solutions, including API integration, third-party libraries, and performance optimization. Adept at debugging to ensure high-quality, responsive apps and an agile collaborator committed to staying current with industry trends.
+          </p>
+        </section>
+
+
+        <!-- What I'm Doing -->
+        <section class="service">
+
+          <h3 class="h3 service-title">What I'm Doing</h3>
+
+          <ul class="service-list">
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <ion-icon name="phone-portrait-outline" style="font-size: 36px; color: var(--orange-yellow-crayola);"></ion-icon>
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Mobile Apps</h4>
+                <p class="service-item-text">
+                  Professional development of applications for Android and iOS using Flutter & Dart.
+                </p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <ion-icon name="code-slash-outline" style="font-size: 36px; color: var(--orange-yellow-crayola);"></ion-icon>
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">API & Backend Integration</h4>
+                <p class="service-item-text">
+                  Integrating REST APIs, JSON parsing, Firebase Authentication, Cloud Firestore, and n8n workflows.
+                </p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <ion-icon name="color-palette-outline" style="font-size: 36px; color: var(--orange-yellow-crayola);"></ion-icon>
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">UI/UX & Glassmorphic Design</h4>
+                <p class="service-item-text">
+                  Crafting modern Glassmorphic and Neumorphic interfaces with smooth animations and responsive layouts.
+                </p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <ion-icon name="server-outline" style="font-size: 36px; color: var(--orange-yellow-crayola);"></ion-icon>
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Offline Database & Storage</h4>
+                <p class="service-item-text">
+                  Implementing SQLite, Hive, and SharedPreferences for high-speed offline local data caching.
+                </p>
+              </div>
+            </li>
+
+          </ul>
+
+        </section>
+
+
+        <!-- Skills Section -->
+        <section class="skills-section-about" style="margin-top: 35px;">
+
+          <h3 class="h3 service-title">Skills</h3>
+
+          <div class="skills-tile-list">
+            <div class="skill-tile-card" title="Dart">
+              <img src="./assets/images/skill-dart.svg" alt="Dart">
+            </div>
+
+            <div class="skill-tile-card" title="Flutter">
+              <img src="./assets/images/skill-flutter.svg" alt="Flutter">
+            </div>
+
+            <div class="skill-tile-card" title="Firebase">
+              <img src="./assets/images/skill-firebase.svg" alt="Firebase">
+            </div>
+
+            <div class="skill-tile-card" title="Postman / REST API">
+              <img src="./assets/images/skill-postman.svg" alt="Postman">
+            </div>
+          </div>
+
+          <div class="skills-bottom-bar"></div>
+
+        </section>
+
+      </article>
+
+
+      <!-- #RESUME -->
+      <article class="resume" data-page="resume">
+
+        <header>
+          <h2 class="h2 article-title">Resume</h2>
+        </header>
+
+        <!-- Education Section -->
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+            <h3 class="h3">Education</h3>
+          </div>
+
+          <ol class="timeline-list" id="dynamicEducationTimeline">
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">B.Tech — Computer Engineering</h4>
+              <p style="color: var(--light-gray-70); font-size: 13.5px; font-weight: 500;">Gyanmanjari Innovative University (GMIU)</p>
+              <span>2023 — 2027</span>
+              <p class="timeline-text">
+                Currently in 7th Semester (Pursuing) | Current CGPA: 6.75
+              </p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Class XII — Science (PCM)</h4>
+              <p style="color: var(--light-gray-70); font-size: 13.5px; font-weight: 500;">GSEB Board</p>
+              <span>2022 — 2023</span>
+              <p class="timeline-text">
+                Percentage: 53%
+              </p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Class X</h4>
+              <p style="color: var(--light-gray-70); font-size: 13.5px; font-weight: 500;">GSEB Board</p>
+              <span>2020 — 2021</span>
+              <p class="timeline-text">
+                Percentage: 78%
+              </p>
+            </li>
+
+          </ol>
+
+        </section>
+
+        <!-- Experience / Internship Section -->
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="briefcase-outline"></ion-icon>
+            </div>
+            <h3 class="h3">Internship & Experience</h3>
+          </div>
+
+          <ol class="timeline-list" id="dynamicExperienceTimeline">
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">App Development Intern (Ongoing)</h4>
+              <p style="color: var(--light-gray-70); font-size: 13.5px; font-weight: 500;">CodeAlpha | Remote (Work From Home)</p>
+              <span>Jul 2026 — Aug 2026</span>
+              <p class="timeline-text">
+                • Currently pursuing a one-month virtual App Development Internship to enhance Flutter development skills through practical learning and project-based experience.
+              </p>
+              <div style="margin-top: 6px;">
+                <a href="https://drive.google.com/file/d/1Wb2r_CAPJEiJdn65lZASoz31_hlSXW6V/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" style="color: var(--orange-yellow-crayola); font-size: 12.5px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
+                  <ion-icon name="open-outline"></ion-icon> View Certificate Link
+                </a>
+              </div>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">JavaScript Developer Intern</h4>
+              <p style="color: var(--light-gray-70); font-size: 13.5px; font-weight: 500;">IT Hub Software Solutions | Bhavnagar, Gujarat</p>
+              <span>Jun 2025</span>
+              <p class="timeline-text">
+                • Completed a two-week internship focused on JavaScript and web development, strengthening programming fundamentals, debugging skills, and gaining hands-on experience through practical coding assignments.
+              </p>
+              <div style="margin-top: 6px;">
+                <a href="https://drive.google.com/drive/folders/1NykjXkT4Wjc-F2iMPT_gVlFenQ8d5w6u" target="_blank" rel="noopener noreferrer" style="color: var(--orange-yellow-crayola); font-size: 12.5px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
+                  <ion-icon name="open-outline"></ion-icon> View Certificate Folder
+                </a>
+              </div>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Industry Intern</h4>
+              <p style="color: var(--light-gray-70); font-size: 13.5px; font-weight: 500;">VP ITLabs | Ahmedabad, Gujarat</p>
+              <span>Jun 2024</span>
+              <p class="timeline-text">
+                • Completed a two-week industry internship, gaining practical exposure to software development workflows, programming fundamentals, and collaborative development practices in a professional environment.
+              </p>
+              <div style="margin-top: 6px;">
+                <a href="https://drive.google.com/drive/folders/1ICAwFgW9aX6h76oAmwPDDTiYKLyVRukT" target="_blank" rel="noopener noreferrer" style="color: var(--orange-yellow-crayola); font-size: 12.5px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
+                  <ion-icon name="open-outline"></ion-icon> View Certificate Folder
+                </a>
+              </div>
+            </li>
+
+          </ol>
+
+        </section>
+
+        <!-- Projects Timeline Section -->
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="code-slash-outline"></ion-icon>
+            </div>
+            <h3 class="h3">Featured Projects Overview</h3>
+          </div>
+
+          <ol class="timeline-list" id="dynamicFeaturedProjectsTimeline">
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">PrimeBuilder — Civil Construction Portfolio & Lead Management App</h4>
+              <span>Tech Stack: Flutter, Firebase, Cloud Firestore, Provider, n8n</span>
+              <p class="timeline-text">
+                • Developing a Flutter application for showcasing civil construction projects and services.<br>
+                • Implementing Firebase Authentication and Cloud Firestore for secure user and project management.<br>
+                • Building an automated lead management system with WhatsApp notifications using n8n.<br>
+                • Following Feature-First architecture and Provider for scalable application development.
+              </p>
+              <div style="margin-top: 6px;">
+                <a href="https://github.com/milan1533/PrimeBuilder_App.git" target="_blank" rel="noopener noreferrer" style="color: var(--orange-yellow-crayola); font-size: 12.5px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
+                  <ion-icon name="logo-github"></ion-icon> GitHub Repository
+                </a>
+              </div>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">InviteX — Private Invite-Only Social Chat Platform</h4>
+              <span>Tech Stack: Flutter, Firebase, Cloud Firestore, Firebase Storage, FCM, SQLite, Provider</span>
+              <p class="timeline-text">
+                • Developed a secure invite-only real-time chat application using Flutter and Firebase.<br>
+                • Implemented Cloud Firestore for instant messaging, Firebase Storage for media sharing, SQLite for offline data caching, and FCM for push notifications.<br>
+                • Designed a modern premium UI using custom Neumorphic and Glassmorphic components while following Provider-based state management.
+              </p>
+              <div style="margin-top: 6px;">
+                <a href="https://github.com/milan1533/inviteX" target="_blank" rel="noopener noreferrer" style="color: var(--orange-yellow-crayola); font-size: 12.5px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
+                  <ion-icon name="logo-github"></ion-icon> GitHub Repository
+                </a>
+              </div>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">SpendNote — Personal Expense & Notes Manager</h4>
+              <span>Tech Stack: Flutter, Dart, SQLite, SharedPreferences, Glassmorphism UI</span>
+              <p class="timeline-text">
+                • Built an offline-first Flutter application for personal expense tracking and note management using SQLite and SharedPreferences.<br>
+                • Designed a premium Glassmorphism interface with reusable widgets, Hero animations, and responsive navigation while implementing secure local data storage and expense analytics.
+              </p>
+              <div style="margin-top: 6px;">
+                <a href="https://github.com/milan1533/SpendNote_App.git" target="_blank" rel="noopener noreferrer" style="color: var(--orange-yellow-crayola); font-size: 12.5px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
+                  <ion-icon name="logo-github"></ion-icon> GitHub Repository
+                </a>
+              </div>
+            </li>
+
+          </ol>
+
+        </section>
+
+        <!-- Certifications & Achievements Section -->
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="trophy-outline"></ion-icon>
+            </div>
+            <h3 class="h3">Certifications & Achievements</h3>
+          </div>
+
+          <ol class="timeline-list" id="dynamicCertificationsTimeline">
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Introduction to Flutter Course — Simply Learn</h4>
+              <span>2026</span>
+              <p class="timeline-text">
+                Completed fundamental and advanced Flutter development course modules.
+              </p>
+              <div style="margin-top: 4px;">
+                <a href="https://drive.google.com/file/d/1uZ5Q2ACIEXx_0hB207hdwNzDdY7ACOqH/view?usp=drive_link" target="_blank" rel="noopener noreferrer" style="color: var(--orange-yellow-crayola); font-size: 12.5px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
+                  <ion-icon name="link-outline"></ion-icon> View Certificate
+                </a>
+              </div>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">3rd Rank — Bot Developers Hackathon</h4>
+              <span>Floatbot.AI | 2025</span>
+              <p class="timeline-text">
+                Secured 3rd Rank in national level Bot Developers Hackathon organized by Floatbot.AI.
+              </p>
+              <div style="margin-top: 4px;">
+                <a href="https://drive.google.com/file/d/1obsDouULf8wHDujE3w2zkFYcEG7Fn18l/view?usp=drive_link" target="_blank" rel="noopener noreferrer" style="color: var(--orange-yellow-crayola); font-size: 12.5px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
+                  <ion-icon name="link-outline"></ion-icon> View Certificate
+                </a>
+              </div>
+            </li>
+
+          </ol>
+
+        </section>
+
+      </article>
+
+
+      <!-- #SKILLS -->
+      <article class="skills" data-page="skills">
+
+        <header>
+          <h2 class="h2 article-title">Technical Skills</h2>
+        </header>
+
+        <section class="skill">
+
+          <h3 class="h3 skills-title">Proficiency & Tools</h3>
+
+          <ul class="skills-list content-card">
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Flutter & Dart Cross-Platform</h5>
+                <data value="95">95%</data>
+              </div>
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 95%;"></div>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Firebase (Auth, Firestore, Storage)</h5>
+                <data value="90">90%</data>
+              </div>
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 90%;"></div>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Provider State Management</h5>
+                <data value="92">92%</data>
+              </div>
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 92%;"></div>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Offline Databases (SQLite & Hive)</h5>
+                <data value="88">88%</data>
+              </div>
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 88%;"></div>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">REST APIs & Google Gemini AI</h5>
+                <data value="85">85%</data>
+              </div>
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 85%;"></div>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Data Visualization (FL Chart)</h5>
+                <data value="85">85%</data>
+              </div>
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 85%;"></div>
+              </div>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+      <!-- #PORTFOLIO (PROJECTS) -->
+      <article class="portfolio" data-page="portfolio">
+
+        <header>
+          <h2 class="h2 article-title">Portfolio</h2>
+        </header>
+
+        <section class="projects">
+
+          <!-- Category Filter List -->
+          <ul class="filter-list">
+            <li class="filter-item">
+              <button class="active" data-filter-btn>All</button>
+            </li>
+            <li class="filter-item">
+              <button data-filter-btn>Applications</button>
+            </li>
+            <li class="filter-item">
+              <button data-filter-btn>Web development</button>
+            </li>
+            <li class="filter-item">
+              <button data-filter-btn>UI/UX</button>
+            </li>
+          </ul>
+
+          <div class="filter-select-box">
+            <button class="filter-select" data-select>
+              <div class="select-value" data-selecct-value>Select category</div>
+              <div class="select-icon">
+                <ion-icon name="chevron-down"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="select-list">
+              <li class="select-item"><button data-select-item>All</button></li>
+              <li class="select-item"><button data-select-item>Applications</button></li>
+              <li class="select-item"><button data-select-item>Web development</button></li>
+              <li class="select-item"><button data-select-item>UI/UX</button></li>
+            </ul>
+          </div>
+
+
+          <!-- Project Cards Grid -->
+          <ul class="project-list">
+
+            <!-- 1. SkillPath -->
+            <li class="project-item active" data-filter-item data-category="applications">
+              <div class="project-card-custom">
+
+                <div class="project-img-box-custom" onclick="openProjectModal('skillpath')">
+                  <img src="./assets/images/projects/skillpath.png" alt="SkillPath App" onerror="this.onerror=null; this.src='./assets/images/projects/skillpath.svg';" loading="lazy">
+                </div>
+
+                <h3 class="project-title-custom">SkillPath</h3>
+                <p class="project-category-custom">Applications</p>
+
+                <div class="project-actions">
+                  <a href="https://github.com/milan1533/SkillPath_App" target="_blank" rel="noopener noreferrer" class="btn-github">
+                    <ion-icon name="logo-github"></ion-icon> GitHub
+                  </a>
+                  <button class="btn-details" onclick="openProjectModal('skillpath')">
+                    <ion-icon name="eye-outline"></ion-icon> View Details
+                  </button>
+                </div>
+
+              </div>
+            </li>
+
+
+            <!-- 2. PrimeBuilder -->
+            <li class="project-item active" data-filter-item data-category="applications">
+              <div class="project-card-custom">
+
+                <div class="project-img-box-custom" onclick="openProjectModal('primebuilder')">
+                  <img src="./assets/images/projects/primebuilder.png" alt="PrimeBuilder App" onerror="this.onerror=null; this.src='./assets/images/projects/primebuilder.svg';" loading="lazy">
+                </div>
+
+                <h3 class="project-title-custom">PrimeBuilder</h3>
+                <p class="project-category-custom">Applications</p>
+
+                <div class="project-actions">
+                  <a href="https://github.com/milan1533/PrimeBuilder_App.git" target="_blank" rel="noopener noreferrer" class="btn-github">
+                    <ion-icon name="logo-github"></ion-icon> GitHub
+                  </a>
+                  <button class="btn-details" onclick="openProjectModal('primebuilder')">
+                    <ion-icon name="eye-outline"></ion-icon> View Details
+                  </button>
+                </div>
+
+              </div>
+            </li>
+
+
+            <!-- 3. InviteX -->
+            <li class="project-item active" data-filter-item data-category="applications">
+              <div class="project-card-custom">
+
+                <div class="project-img-box-custom" onclick="openProjectModal('invitex')">
+                  <img src="./assets/images/projects/invitex.png" alt="InviteX App" onerror="this.onerror=null; this.src='./assets/images/projects/invitex.svg';" loading="lazy">
+                </div>
+
+                <h3 class="project-title-custom">InviteX</h3>
+                <p class="project-category-custom">Applications</p>
+
+                <div class="project-actions">
+                  <a href="https://github.com/milan1533/inviteX" target="_blank" rel="noopener noreferrer" class="btn-github">
+                    <ion-icon name="logo-github"></ion-icon> GitHub
+                  </a>
+                  <button class="btn-details" onclick="openProjectModal('invitex')">
+                    <ion-icon name="eye-outline"></ion-icon> View Details
+                  </button>
+                </div>
+
+              </div>
+            </li>
+
+
+            <!-- 4. SpendNote -->
+            <li class="project-item active" data-filter-item data-category="applications">
+              <div class="project-card-custom">
+
+                <div class="project-img-box-custom" onclick="openProjectModal('spendnote')">
+                  <img src="./assets/images/projects/spendnote.png" alt="SpendNote App" onerror="this.onerror=null; this.src='./assets/images/projects/spendnote.svg';" loading="lazy">
+                </div>
+
+                <h3 class="project-title-custom">SpendNote</h3>
+                <p class="project-category-custom">Applications</p>
+
+                <div class="project-actions">
+                  <a href="https://github.com/milan1533/SpendNote_App.git" target="_blank" rel="noopener noreferrer" class="btn-github">
+                    <ion-icon name="logo-github"></ion-icon> GitHub
+                  </a>
+                  <button class="btn-details" onclick="openProjectModal('spendnote')">
+                    <ion-icon name="eye-outline"></ion-icon> View Details
+                  </button>
+                </div>
+
+              </div>
+            </li>
+
+
+            <!-- 5. BMI Calculator -->
+            <li class="project-item active" data-filter-item data-category="applications">
+              <div class="project-card-custom">
+
+                <div class="project-img-box-custom" onclick="openProjectModal('bmi')">
+                  <img src="./assets/images/projects/bmi.png" alt="BMI Calculator App" onerror="this.onerror=null; this.src='./assets/images/projects/bmi.svg';" loading="lazy">
+                </div>
+
+                <h3 class="project-title-custom">BMI Calculator</h3>
+                <p class="project-category-custom">Applications</p>
+
+                <div class="project-actions">
+                  <a href="https://github.com/milan1533/BMI-App" target="_blank" rel="noopener noreferrer" class="btn-github">
+                    <ion-icon name="logo-github"></ion-icon> GitHub
+                  </a>
+                  <button class="btn-details" onclick="openProjectModal('bmi')">
+                    <ion-icon name="eye-outline"></ion-icon> View Details
+                  </button>
+                </div>
+
+              </div>
+            </li>
+
+          </ul>
+
+        </section>
+
+
+        <!-- GitHub Statistics Section -->
+        <section class="github-stats-section">
+
+          <div class="title-wrapper" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <div class="icon-box">
+              <ion-icon name="logo-github"></ion-icon>
+            </div>
+            <h3 class="h3">GitHub Activity & Stats</h3>
+          </div>
+
+          <div class="stats-grid">
+
+            <div class="stats-card">
+              <img src="https://github-readme-stats.vercel.app/api?username=milan1533&show_icons=true&theme=dark&bg_color=18181c&title_color=ffb703&text_color=e0e0e0&icon_color=ffb703" alt="Milan's GitHub Stats" onerror="this.style.display='none';">
+            </div>
+
+            <div class="stats-card">
+              <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=milan1533&layout=compact&theme=dark&bg_color=18181c&title_color=ffb703&text_color=e0e0e0" alt="Milan's Top Languages" onerror="this.style.display='none';">
+            </div>
+
+          </div>
+
+        </section>
+
+      </article>
+
+
+      <!-- #BLOG -->
+      <article class="blog" data-page="blog">
+
+        <header>
+          <h2 class="h2 article-title">Blog</h2>
+        </header>
+
+        <section class="blog-posts">
+
+          <ul class="blog-posts-list">
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/blog-1.svg" alt="Flutter Vs. Flock: Cross-Platform Evaluation" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <span class="blog-category">Blog</span>
+                    <span class="dot"></span>
+                    <time datetime="2024-11-18">Nov 18, 2024</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Flutter Vs. Flock: Cross-Platform Evaluation</h3>
+
+                  <p class="blog-text">
+                    Explore the differences between Flutter and Flock, a new fork focused on faster development and community-driven cross-platform evaluation.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/blog-2.svg" alt="Flutter's Impact On Future Cross-Platform Apps" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <span class="blog-category">Blog</span>
+                    <span class="dot"></span>
+                    <time datetime="2024-11-13">Nov 13, 2024</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Flutter's Impact On Future Cross-Platform Apps</h3>
+
+                  <p class="blog-text">
+                    Explore Flutter's growing influence on cross-platform app development in 2024 and its future potential across mobile, web, and IoT...
+                  </p>
+                </div>
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+      <!-- #CONTACT -->
+      <article class="contact" data-page="contact">
+
+        <header>
+          <h2 class="h2 article-title">Contact</h2>
+        </header>
+
+        <section class="contact-form">
+
+          <h3 class="h3 form-title">Send Me a Message</h3>
+
+          <form action="#" class="form" data-form>
+
+            <div class="input-wrapper">
+              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+            </div>
+
+            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+
+            <button class="form-btn" type="submit" disabled data-form-btn>
+              <ion-icon name="paper-plane"></ion-icon>
+              <span>Send Message</span>
+            </button>
+
+          </form>
+
+        </section>
+
+      </article>
+
+    </div>
+
+  </main>
+
+
+  <!-- PROJECT DETAILS POPUP MODAL -->
+  <div class="modal-overlay-custom" id="projectModalOverlay">
+    <div class="modal-content-custom">
+
+      <button class="modal-close-custom" id="modalCloseBtnCustom" title="Close Modal">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+
+      <div>
+        <span class="featured-badge" id="modalFeaturedTag" style="display: none; position: static; margin-bottom: 10px;">⭐ Featured Project</span>
+        <h3 class="h2" id="modalTitle" style="color: var(--white-2); font-size: 22px; margin-bottom: 4px;">Project Title</h3>
+        <p id="modalCategory" style="color: var(--orange-yellow-crayola); font-weight: 500; font-size: 14px; margin-bottom: 12px;">Category</p>
+      </div>
+
+      <div class="modal-body-grid">
+
+        <!-- Left Side: Screenshot Gallery -->
+        <div>
+          <h5 style="color: var(--light-gray-70); font-size: 12px; text-transform: uppercase; margin-bottom: 8px;">📱 Application Gallery</h5>
+          
+          <div class="modal-gallery-view" onclick="openLightbox(document.getElementById('modalMainImage').src, document.getElementById('modalTitle').innerText)">
+            <img id="modalMainImage" src="./assets/images/projects/skillpath.svg" alt="Project Screenshot Preview">
+          </div>
+
+          <div class="modal-thumbs-row" id="modalThumbsContainer">
+            <!-- Thumbs dynamically injected -->
+          </div>
+        </div>
+
+        <!-- Right Side: Details & Highlights -->
+        <div>
+          <h5 style="color: var(--light-gray-70); font-size: 12px; text-transform: uppercase; margin-bottom: 6px;">Overview</h5>
+          <p id="modalDescription" style="color: var(--light-gray); font-size: 13.5px; line-height: 1.5; margin-bottom: 14px;">Description</p>
+
+          <h5 style="color: var(--light-gray-70); font-size: 12px; text-transform: uppercase; margin-bottom: 6px;">Tech Stack</h5>
+          <div class="tech-badges" id="modalTechBadges">
+            <!-- Tech badges injected -->
+          </div>
+
+          <h5 style="color: var(--light-gray-70); font-size: 12px; text-transform: uppercase; margin-top: 14px; margin-bottom: 6px;">Key Features & Accomplishments</h5>
+          <ul class="project-highlights-list" id="modalHighlights">
+            <!-- Highlights list injected -->
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Technical Challenge & Solution Section -->
+      <div class="challenge-box">
+        <h5><ion-icon name="bulb-outline"></ion-icon> Technical Challenge Faced</h5>
+        <p id="modalChallenge">Challenge text here</p>
+
+        <h5 style="margin-top: 10px;"><ion-icon name="checkmark-done-circle-outline"></ion-icon> Solution Implemented</h5>
+        <p id="modalSolution">Solution text here</p>
+      </div>
+
+      <!-- Future Improvements & Links -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--jet);">
+        <div>
+          <h5 style="color: var(--light-gray-70); font-size: 12px; text-transform: uppercase; margin-bottom: 4px;">Future Roadmap</h5>
+          <p id="modalFuture" style="color: var(--light-gray); font-size: 13px;">Future improvements</p>
+        </div>
+
+        <div>
+          <a href="#" id="modalGithubBtn" target="_blank" rel="noopener noreferrer" class="btn-github" style="padding: 10px 18px; font-size: 13px;">
+            <ion-icon name="logo-github"></ion-icon> View GitHub Repository
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- LIGHTBOX FULLSCREEN IMAGE VIEWER -->
+  <div class="lightbox-overlay" id="lightboxOverlay">
+    <button class="lightbox-close-btn" id="lightboxCloseBtn" title="Close Fullscreen View">
+      <ion-icon name="close-outline"></ion-icon>
+    </button>
+    <div class="lightbox-image-wrapper">
+      <img id="lightboxImage" src="" alt="Fullscreen Screenshot Preview">
+    </div>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+
+  <!-- Supabase JS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Custom JS link -->
+  <script src="./assets/js/script.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

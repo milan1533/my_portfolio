@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07040d"/>
+      <stop offset="60%" stop-color="#0f0724"/>
+      <stop offset="100%" stop-color="#4c00b0"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="80%" cy="20%" r="50%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg1)"/>
+  <rect width="800" height="450" fill="url(#glow1)"/>
+
+  <!-- Left Side Text Block -->
+  <text x="50" y="160" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="900" font-size="44" fill="#a855f7" letter-spacing="1">IS FLUTTER</text>
+  <text x="50" y="215" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="900" font-size="44" fill="#a855f7" letter-spacing="1">REPLACED ?</text>
+  
+  <text x="50" y="270" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="700" font-size="16" fill="#e9d5ff" letter-spacing="3">MEET FLOCK</text>
+  
+  <!-- Underline squiggly accent -->
+  <path d="M 50 285 Q 100 295 150 285 T 230 288" fill="none" stroke="#7e22ce" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Right Side Box with Flying Birds Icon -->
+  <rect x="500" y="100" width="220" height="220" rx="8" fill="#181325" stroke="#2e2246" stroke-width="2"/>
+  
+  <!-- Neon Birds SVG Path -->
+  <g stroke="#f472b6" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="translate(530, 130)">
+    <!-- Main Bird -->
+    <path d="M 10 50 Q 50 10 90 50 Q 130 10 170 50 Q 130 90 90 70 Q 50 90 10 50 Z" />
+    <path d="M 60 40 Q 90 20 120 40" stroke="#ec4899" stroke-width="3" />
+    <!-- Secondary Small Bird -->
+    <path d="M 30 100 Q 60 75 90 100 Q 120 75 150 100" stroke="#f472b6" stroke-width="3" />
+  </g>
+</svg>
