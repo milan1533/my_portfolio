@@ -114,6 +114,7 @@ const projectsData = {
     challenges: "Handling real-time AI response streaming and complex JSON parsing while maintaining offline state synchronization with Hive.",
     solution: "Architected custom data mappers and local cache repositories to ensure seamless offline access and fluid FL Chart visualizations.",
     future: "Voice-guided AI recommendations, real-time mock interviews, and automated PDF export of career roadmaps.",
+    // 📸 MODAL SCREENSHOTS: Add/change your project screenshot image links here
     screenshots: [
       "./assets/images/projects/skillpath.svg",
       "./assets/images/projects/skillpath.svg",
@@ -138,6 +139,7 @@ const projectsData = {
     challenges: "Handling high-resolution construction media assets and multi-step inquiry workflows efficiently across varied network speeds.",
     solution: "Modularized project architecture into feature packages with Provider state management and Cloud Firestore query indexing with local cache.",
     future: "AR/VR 3D project visualization, push notifications for lead updates, and automated quotation generator.",
+    // 📸 MODAL SCREENSHOTS: Add/change your project screenshot image links here
     screenshots: [
       "./assets/images/projects/primebuilder.svg",
       "./assets/images/projects/primebuilder.svg",
@@ -162,6 +164,7 @@ const projectsData = {
     challenges: "Maintaining message order consistency between local SQLite storage and remote Cloud Firestore synchronization during network drops.",
     solution: "Engineered a dual-layer sync mechanism: storing chat drafts and history locally via SQLite while leveraging Firestore real-time streams upon reconnection.",
     future: "End-to-End Encryption (E2EE), audio/video calling integration, and group message search.",
+    // 📸 MODAL SCREENSHOTS: Add/change your project screenshot image links here
     screenshots: [
       "./assets/images/projects/invitex.svg",
       "./assets/images/projects/invitex.svg",
@@ -186,6 +189,7 @@ const projectsData = {
     challenges: "Computing aggregate expense summaries dynamically in SQLite without causing UI frame drops during smooth scrolling.",
     solution: "Optimized SQLite queries with indexed columns and executed aggregate computations off the UI thread.",
     future: "Google Drive backup/restore, PDF summary report export, and budget alert limits.",
+    // 📸 MODAL SCREENSHOTS: Add/change your project screenshot image links here
     screenshots: [
       "./assets/images/projects/spendnote.svg",
       "./assets/images/projects/spendnote.svg",
@@ -210,6 +214,7 @@ const projectsData = {
     challenges: "Ensuring interactive input controls (height/weight selectors) remain visually fluid and responsive on different device screen densities.",
     solution: "Utilized custom animated widgets and Material 3 design constraints for responsive layout scaling.",
     future: "Historical BMI progress graphs, daily water intake tracker, and personalized health recommendations.",
+    // 📸 MODAL SCREENSHOTS: Add/change your project screenshot image links here
     screenshots: [
       "./assets/images/projects/bmi.svg",
       "./assets/images/projects/bmi.svg",
