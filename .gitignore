@@ -1,5 +1,4 @@
-# Ignore Local Admin Panel & Config files (Keep private to your computer)
-admin.html
+# Environment variables & secrets
 admin-config.js
 .env
 .env.local

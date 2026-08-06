@@ -386,8 +386,14 @@ const PUBLIC_SUPABASE_KEY = "sb_publishable_QulD4xqKUR536zixPMn4lA_0OnqL5wu";
       if (p.email && emailLink) { emailLink.innerText = p.email; emailLink.href = "mailto:" + p.email; }
       if (p.phone && phoneLink) { phoneLink.innerText = p.phone; phoneLink.href = "tel:" + p.phone.replace(/\s+/g, ''); }
       if (p.location && locationTxt) locationTxt.innerText = p.location;
+      // Preserve modern formatted bio HTML if p.about_text is plain text from database
       if (p.about_text && bioSec) {
-        bioSec.innerHTML = p.about_text.split('\n\n').map(para => `<p>${para}</p>`).join('');
+        const isPlainBio = !p.about_text.includes('<span') && !p.about_text.includes('<div') && !p.about_text.includes('about-tech-stack');
+        const hasModernHTML = bioSec.querySelector('.about-lead') || bioSec.querySelector('.about-tech-stack');
+        
+        if (!isPlainBio || !hasModernHTML) {
+          bioSec.innerHTML = p.about_text.split('\n\n').map(para => para.startsWith('<') ? para : `<p>${para}</p>`).join('');
+        }
       }
 
       if (p.resume_url) {
