@@ -352,6 +352,13 @@ const PUBLIC_SUPABASE_KEY = "sb_publishable_QulD4xqKUR536zixPMn4lA_0OnqL5wu";
 
   if (!sbUrl || !sbKey || !window.supabase) return;
 
+  // Hydrate local cached avatar immediately if available
+  const cachedAvatar = localStorage.getItem('custom_avatar_url');
+  const sidebarAvatar = document.getElementById('sidebarAvatarImage');
+  if (cachedAvatar && sidebarAvatar) {
+    sidebarAvatar.src = cachedAvatar;
+  }
+
   try {
     const supabaseClient = window.supabase.createClient(sbUrl, sbKey, { auth: { persistSession: false } });
 
@@ -367,7 +374,13 @@ const PUBLIC_SUPABASE_KEY = "sb_publishable_QulD4xqKUR536zixPMn4lA_0OnqL5wu";
       const locationTxt = document.getElementById('sidebarLocationText');
       const bioSec = document.getElementById('aboutBioText');
 
-      if (p.avatar_url && avatarImg) avatarImg.src = p.avatar_url;
+      if (p.avatar_url && avatarImg && p.avatar_url.trim() !== '') {
+        const localCached = localStorage.getItem('custom_avatar_url');
+        if (p.avatar_url.startsWith('data:') || p.avatar_url.startsWith('http') || !localCached) {
+          avatarImg.src = p.avatar_url;
+          localStorage.setItem('custom_avatar_url', p.avatar_url);
+        }
+      }
       if (p.name && nameTxt) { nameTxt.innerText = p.name; nameTxt.title = p.name; }
       if (p.role && roleTxt) roleTxt.innerText = p.role;
       if (p.email && emailLink) { emailLink.innerText = p.email; emailLink.href = "mailto:" + p.email; }

@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMS Admin Portal - Milan Portfolio</title>
+  <!-- Supabase JS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #1e1e1f 0%, #121212 100%);
+      --card-bg: #1e1e1f;
+      --card-border: #383838;
+      --text-main: #fafafa;
+      --text-muted: #d6d6d6;
+      --accent-gold: #ffdb70;
+      --accent-gold-gradient: linear-gradient(135deg, #ffdb70 0%, #e6c200 100%);
+      --danger-red: #ff4d4d;
+      --success-green: #2ecc71;
+      --jet: #2b2b2c;
+      --onyx: #202021;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+        padding: 12px;
+      }
+    }
+
+    /* Sidebar Navigation */
+    .sidebar-admin {
+      width: 270px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 25px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      height: fit-content;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar-admin {
+        width: 100%;
+        padding: 15px;
+      }
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-avatar {
+      width: 44px;
+      height: 44px;
+      background: var(--onyx);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      font-size: 22px;
+    }
+
+    .brand-title h2 {
+      font-size: 15px;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .brand-title p {
+      font-size: 12px;
+      color: var(--accent-gold);
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-list {
+        flex-direction: row;
+        overflow-x: auto;
+      }
+    }
+
+    .nav-item button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 13.5px;
+      font-weight: 500;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .nav-item button:hover,
+    .nav-item button.active {
+      background: var(--onyx);
+      color: var(--accent-gold);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .badge-count {
+      margin-left: auto;
+      background: var(--accent-gold);
+      color: #121212;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.35s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-title {
+      font-size: 20px;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .page-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    /* Form Inputs */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--accent-gold);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 11px 13px;
+      background: var(--onyx);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 13.5px;
+      outline: none;
+      transition: border 0.25s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent-gold);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    button.btn-submit {
+      background: var(--accent-gold-gradient);
+      color: #121212;
+      border: none;
+      font-weight: 600;
+      padding: 12px 22px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    button.btn-submit:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    /* Status Banner */
+    .status-msg {
+      margin-bottom: 18px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      display: none;
+    }
+
+    .status-msg.success {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(46, 204, 113, 0.15);
+      border: 1px solid var(--success-green);
+      color: var(--success-green);
+    }
+
+    .status-msg.error {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 77, 77, 0.15);
+      border: 1px solid var(--danger-red);
+      color: var(--danger-red);
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .item-card {
+      background: var(--onyx);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .item-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .item-card-title {
+      font-size: 14.5px;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .item-card-sub {
+      font-size: 12px;
+      color: var(--accent-gold);
+    }
+
+    .item-card-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .btn-delete {
+      background: rgba(255, 77, 77, 0.2);
+      border: 1px solid var(--danger-red);
+      color: var(--danger-red);
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: auto;
+      align-self: flex-end;
+      transition: background 0.2s;
+    }
+
+    .btn-delete:hover {
+      background: var(--danger-red);
+      color: #fff;
+    }
+
+    .avatar-preview {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      object-fit: cover;
+      border: 2px solid var(--accent-gold);
+      margin-bottom: 10px;
+    }
+
+    .section-header {
+      font-size: 15px;
+      color: var(--accent-gold);
+      margin: 25px 0 12px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar-admin">
+    <div class="brand-box">
+      <div class="brand-avatar">
+        <ion-icon name="speedometer"></ion-icon>
+      </div>
+      <div class="brand-title">
+        <h2>Portfolio CMS</h2>
+        <p>Full Dynamic Admin</p>
+      </div>
+    </div>
+
+    <ul class="nav-list">
+      <li class="nav-item">
+        <button class="active" onclick="switchTab('profileTab', this)">
+          <ion-icon name="person-circle-outline"></ion-icon> Profile & About
+        </button>
+      </li>
+      <li class="nav-item">
+        <button onclick="switchTab('servicesTab', this)">
+          <ion-icon name="grid-outline"></ion-icon> What I'm Doing
+        </button>
+      </li>
+      <li class="nav-item">
+        <button onclick="switchTab('skillsTab', this)">
+          <ion-icon name="flash-outline"></ion-icon> Skills
+        </button>
+      </li>
+      <li class="nav-item">
+        <button onclick="switchTab('projectsTab', this)">
+          <ion-icon name="folder-open-outline"></ion-icon> Projects
+        </button>
+      </li>
+      <li class="nav-item">
+        <button onclick="switchTab('blogTab', this)">
+          <ion-icon name="newspaper-outline"></ion-icon> Blog Posts
+        </button>
+      </li>
+      <li class="nav-item">
+        <button onclick="switchTab('resumeTab', this)">
+          <ion-icon name="document-text-outline"></ion-icon> Resume & Timelines
+        </button>
+      </li>
+      <li class="nav-item">
+        <button onclick="switchTab('messagesTab', this)">
+          <ion-icon name="mail-unread-outline"></ion-icon> Messages
+          <span class="badge-count" id="msgBadge">0</span>
+        </button>
+      </li>
+      <li class="nav-item">
+        <button onclick="switchTab('settingsTab', this)">
+          <ion-icon name="settings-outline"></ion-icon> Settings
+        </button>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <div id="statusMsg" class="status-msg"></div>
+
+    <!-- 1. PROFILE & ABOUT TAB -->
+    <section id="profileTab" class="tab-content active">
+      <h1 class="page-title"><ion-icon name="person-circle"></ion-icon> Profile & About Me Settings</h1>
+      <p class="page-subtitle">Update your profile avatar photo, personal details, contact info, and About Me bio.</p>
+
+      <form id="profileForm" onsubmit="handleSaveProfile(event)">
+        <div style="background: var(--onyx); padding: 18px; border-radius: 14px; border: 1px solid var(--card-border); margin-bottom: 20px;">
+          <label style="font-size: 13.5px; font-weight: 600; color: var(--accent-gold); margin-bottom: 10px; display: block;">Profile Avatar Photo</label>
+          <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+            <img id="avatarPreviewDisplay" src="./assets/images/my-avatar.png" class="avatar-preview" onerror="this.src='./assets/images/avatar-1.png'" style="margin-bottom: 0;">
+            <div style="flex: 1; min-width: 220px;">
+              <input type="file" id="pAvatar" accept="image/*" onchange="previewAvatar(this)" style="margin-bottom: 10px;">
+              <button type="button" class="btn-submit" onclick="uploadAvatarOnly()" style="padding: 9px 16px; font-size: 13px; width: auto; background: var(--onyx); border: 1px solid var(--accent-gold); color: var(--accent-gold);">
+                <ion-icon name="image-outline"></ion-icon> Update Only Photo
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="pName">Full Name</label>
+            <input type="text" id="pName" placeholder="Milan Boricha">
+          </div>
+          <div class="form-group">
+            <label for="pRole">Role / Title</label>
+            <input type="text" id="pRole" placeholder="Flutter Developer">
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="pEmail">Email Address</label>
+            <input type="email" id="pEmail" placeholder="borichamilan792@gmail.com">
+          </div>
+          <div class="form-group">
+            <label for="pPhone">Phone Number</label>
+            <input type="text" id="pPhone" placeholder="+91 8200121272">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pLocation">Location</label>
+          <input type="text" id="pLocation" placeholder="Bhavnagar, Gujarat, India">
+        </div>
+
+        <div class="form-group">
+          <label for="pAbout">About Me Bio Paragraph</label>
+          <textarea id="pAbout" rows="5" placeholder="Write your About Me bio paragraph here..."></textarea>
+        </div>
+
+        <button type="submit" id="saveProfileBtn" class="btn-submit">
+          <ion-icon name="save-outline"></ion-icon> Save All Profile Changes
+        </button>
+      </form>
+    </section>
+
+    <!-- 2. WHAT I'M DOING (SERVICES) TAB -->
+    <section id="servicesTab" class="tab-content">
+      <h1 class="page-title"><ion-icon name="grid"></ion-icon> "What I'm Doing" (Services)</h1>
+      <p class="page-subtitle">Add, edit or delete services/skills cards displayed on your About page.</p>
+
+      <form id="serviceForm" onsubmit="handleAddService(event)">
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="sTitle">Service Title *</label>
+            <input type="text" id="sTitle" placeholder="e.g. Flutter App Development" required>
+          </div>
+          <div class="form-group">
+            <label for="sIcon">Icon File or Emoji / SVG Path</label>
+            <input type="text" id="sIcon" placeholder="e.g. 📱 or ./assets/images/icon-app.svg">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="sDesc">Service Description *</label>
+          <textarea id="sDesc" rows="3" placeholder="High-performance cross-platform mobile apps for iOS and Android..." required></textarea>
+        </div>
+
+        <button type="submit" id="addServiceBtn" class="btn-submit">
+          <ion-icon name="add-circle-outline"></ion-icon> Add Service Card
+        </button>
+      </form>
+
+      <h2 class="section-header">Existing Services Cards</h2>
+      <div id="servicesList" class="cards-grid">
+        <p style="color: #888; font-size: 13px;">Loading services...</p>
+      </div>
+    </section>
+
+    <!-- 3. SKILLS TAB -->
+    <section id="skillsTab" class="tab-content">
+      <h1 class="page-title"><ion-icon name="flash"></ion-icon> Skills Management</h1>
+      <p class="page-subtitle">Manage skill items and percentage progress bars on your Resume page.</p>
+
+      <form id="skillForm" onsubmit="handleAddSkill(event)">
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="skTitle">Skill Name *</label>
+            <input type="text" id="skTitle" placeholder="e.g. Flutter & Dart" required>
+          </div>
+          <div class="form-group">
+            <label for="skPercent">Skill Level Percentage (0 - 100) *</label>
+            <input type="number" id="skPercent" min="1" max="100" placeholder="90" required>
+          </div>
+        </div>
+
+        <button type="submit" id="addSkillBtn" class="btn-submit">
+          <ion-icon name="add-circle-outline"></ion-icon> Add Skill Progress Bar
+        </button>
+      </form>
+
+      <h2 class="section-header">Existing Skills</h2>
+      <div id="skillsList" class="cards-grid">
+        <p style="color: #888; font-size: 13px;">Loading skills...</p>
+      </div>
+    </section>
+
+    <!-- 4. PROJECTS TAB -->
+    <section id="projectsTab" class="tab-content">
+      <h1 class="page-title"><ion-icon name="folder-open"></ion-icon> Projects Management</h1>
+      <p class="page-subtitle">Add new projects with cover images and multiple app screenshots for the gallery.</p>
+
+      <form id="projectForm" onsubmit="handleAddProject(event)">
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="pTitle">Project Title *</label>
+            <input type="text" id="pTitle" placeholder="e.g. SkillPath App" required>
+          </div>
+          <div class="form-group">
+            <label for="pCategory">Category *</label>
+            <select id="pCategory" required>
+              <option value="Applications">Applications</option>
+              <option value="Web development">Web development</option>
+              <option value="Web design">Web design</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pSubtitle">Subtitle / Short Summary</label>
+          <input type="text" id="pSubtitle" placeholder="e.g. AI-Powered Skill Tracker & Career Platform">
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="pGithub">GitHub Repository Link</label>
+            <input type="url" id="pGithub" placeholder="https://github.com/milan1533/...">
+          </div>
+          <div class="form-group">
+            <label for="pTech">Tech Stack (comma separated)</label>
+            <input type="text" id="pTech" placeholder="e.g. Flutter, Dart, Firebase">
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="pCoverImage">Cover Image (Thumbnail) *</label>
+            <input type="file" id="pCoverImage" accept="image/*" required>
+          </div>
+          <div class="form-group">
+            <label for="pScreenshots">App Screenshots (Multiple files supported)</label>
+            <input type="file" id="pScreenshots" accept="image/*" multiple>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pDescription">Detailed Description</label>
+          <textarea id="pDescription" rows="3" placeholder="Explain what this project does..."></textarea>
+        </div>
+
+        <button type="submit" id="submitProjectBtn" class="btn-submit">
+          <ion-icon name="cloud-upload-outline"></ion-icon> Upload & Add Project
+        </button>
+      </form>
+
+      <h2 class="section-header">Existing Projects</h2>
+      <div id="projectsList" class="cards-grid">
+        <p style="color: #888; font-size: 13px;">Loading projects...</p>
+      </div>
+    </section>
+
+    <!-- 5. BLOG POSTS TAB -->
+    <section id="blogTab" class="tab-content">
+      <h1 class="page-title"><ion-icon name="newspaper"></ion-icon> Blog Posts Management</h1>
+      <p class="page-subtitle">Publish articles, dev posts, and news to your Blog section.</p>
+
+      <form id="blogForm" onsubmit="handleAddBlog(event)">
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="bTitle">Blog Article Title *</label>
+            <input type="text" id="bTitle" placeholder="e.g. Building Cross-Platform Apps with Flutter" required>
+          </div>
+          <div class="form-group">
+            <label for="bCategory">Category *</label>
+            <input type="text" id="bCategory" placeholder="e.g. Flutter • Mobile Dev" required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="bDate">Publish Date</label>
+            <input type="text" id="bDate" placeholder="e.g. Aug 05, 2026">
+          </div>
+          <div class="form-group">
+            <label for="bImage">Banner Image File *</label>
+            <input type="file" id="bImage" accept="image/*" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bContent">Article Content *</label>
+          <textarea id="bContent" rows="4" placeholder="Write full blog article here..." required></textarea>
+        </div>
+
+        <button type="submit" id="addBlogBtn" class="btn-submit">
+          <ion-icon name="newspaper-outline"></ion-icon> Publish Blog Post
+        </button>
+      </form>
+
+      <h2 class="section-header">Published Blog Posts</h2>
+      <div id="blogsList" class="cards-grid">
+        <p style="color: #888; font-size: 13px;">Loading blog posts...</p>
+      </div>
+    </section>
+
+    <!-- 6. RESUME & TIMELINES TAB -->
+    <section id="resumeTab" class="tab-content">
+      <h1 class="page-title"><ion-icon name="document-text"></ion-icon> Resume & Timelines Manager</h1>
+      <p class="page-subtitle">Upload your Resume PDF and add/delete Education, Experience, Featured Projects Overview, and Certifications timeline entries.</p>
+
+      <!-- Resume PDF Upload Box -->
+      <form id="resumeForm" onsubmit="handleSaveResume(event)" style="margin-bottom: 30px; background: var(--onyx); padding: 18px; border-radius: 12px; border: 1px solid var(--card-border);">
+        <h3 style="font-size: 15px; color: var(--accent-gold); margin-bottom: 12px;"><ion-icon name="cloud-download-outline"></ion-icon> Downloadable Resume PDF</h3>
+        
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="resumeFile">Upload Resume PDF</label>
+            <input type="file" id="resumeFile" accept=".pdf,application/pdf">
+          </div>
+          <div class="form-group">
+            <label for="resumeUrl">OR Paste PDF Link</label>
+            <input type="url" id="resumeUrl" placeholder="https://example.com/milan_resume.pdf">
+          </div>
+        </div>
+
+        <button type="submit" id="submitResumeBtn" class="btn-submit">
+          <ion-icon name="save-outline"></ion-icon> Save Resume Link
+        </button>
+        <p id="activeResumeDisplay" style="font-size: 12px; color: var(--text-muted); margin-top: 10px; word-break: break-all;"></p>
+      </form>
+
+      <!-- Timeline Entries Manager Form -->
+      <h2 class="section-header">Add Resume Timeline Entry</h2>
+      <form id="timelineForm" onsubmit="handleAddTimeline(event)">
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="tSection">Target Resume Section *</label>
+            <select id="tSection" required>
+              <option value="education">🎓 Education</option>
+              <option value="experience">💼 Internship & Experience</option>
+              <option value="featured_project">🚀 Featured Projects Overview</option>
+              <option value="certification">🏆 Certifications & Achievements</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="tTitle">Title / Degree / Role *</label>
+            <input type="text" id="tTitle" placeholder="e.g. B.Tech — Computer Engineering" required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="tSubtitle">Subtitle / University / Company Name</label>
+            <input type="text" id="tSubtitle" placeholder="e.g. Gyanmanjari Innovative University (GMIU)">
+          </div>
+          <div class="form-group">
+            <label for="tDuration">Duration / Dates / Year</label>
+            <input type="text" id="tDuration" placeholder="e.g. 2023 — 2027 or Jun 2024">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tLink">Certificate Folder / Project URL (Optional)</label>
+          <input type="url" id="tLink" placeholder="https://drive.google.com/...">
+        </div>
+
+        <div class="form-group">
+          <label for="tDesc">Description / Bullet Points / Details</label>
+          <textarea id="tDesc" rows="3" placeholder="Enter CGPA, details, or work summary..."></textarea>
+        </div>
+
+        <button type="submit" id="addTimelineBtn" class="btn-submit">
+          <ion-icon name="add-circle-outline"></ion-icon> + Add Timeline Entry
+        </button>
+      </form>
+
+      <h2 class="section-header">🎓 Education Timeline Entries</h2>
+      <div id="eduList" class="cards-grid"></div>
+
+      <h2 class="section-header">💼 Internship & Experience Entries</h2>
+      <div id="expList" class="cards-grid"></div>
+
+      <h2 class="section-header">🚀 Featured Projects Overview Entries</h2>
+      <div id="featProjList" class="cards-grid"></div>
+
+      <h2 class="section-header">🏆 Certifications & Achievements Entries</h2>
+      <div id="certList" class="cards-grid"></div>
+    </section>
+
+    <!-- 7. MESSAGES TAB -->
+    <section id="messagesTab" class="tab-content">
+      <h1 class="page-title"><ion-icon name="mail-unread"></ion-icon> Client Contact Messages</h1>
+      <p class="page-subtitle">View inquiries and messages sent by visitors through your live portfolio contact form.</p>
+
+      <div id="messagesList">
+        <p style="color: #888; font-size: 13px;">Loading messages...</p>
+      </div>
+    </section>
+
+    <!-- 8. SETTINGS TAB -->
+    <section id="settingsTab" class="tab-content">
+      <h1 class="page-title"><ion-icon name="settings"></ion-icon> Supabase Connection Settings</h1>
+      <p class="page-subtitle">Configure your Supabase Project URL and Anon Key.</p>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="sbUrl">Supabase Project URL</label>
+          <input type="text" id="sbUrl" placeholder="https://xyz.supabase.co">
+        </div>
+        <div class="form-group">
+          <label for="sbKey">Supabase Anon Key</label>
+          <input type="text" id="sbKey" placeholder="eyJhbGciOi...">
+        </div>
+      </div>
+
+      <button type="button" class="btn-submit" onclick="saveConfig()">
+        <ion-icon name="checkmark-circle-outline"></ion-icon> Save Connection Settings
+      </button>
+    </section>
+
+  </main>
+
+  <script>
+    const DEFAULT_SUPABASE_URL = "https://fgetdklcraijnnfbccal.supabase.co";
+    const DEFAULT_SUPABASE_KEY = "sb_publishable_QulD4xqKUR536zixPMn4lA_0OnqL5wu";
+
+    let supabaseClient = null;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedUrl = localStorage.getItem('sb_url') || DEFAULT_SUPABASE_URL;
+      const savedKey = localStorage.getItem('sb_key') || DEFAULT_SUPABASE_KEY;
+      document.getElementById('sbUrl').value = savedUrl;
+      document.getElementById('sbKey').value = savedKey;
+
+      if (savedUrl && savedKey) {
+        initSupabase(savedUrl, savedKey);
+      }
+    });
+
+    function showStatus(msg, isError = false) {
+      const status = document.getElementById('statusMsg');
+      status.innerHTML = `<ion-icon name="${isError ? 'alert-circle' : 'checkmark-circle'}"></ion-icon> ${msg}`;
+      status.className = 'status-msg ' + (isError ? 'error' : 'success');
+      setTimeout(() => {
+        if (!isError) status.style.display = 'none';
+      }, 5000);
+    }
+
+    function switchTab(tabId, btnElem) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-item button').forEach(b => b.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      btnElem.classList.add('active');
+
+      if (tabId === 'profileTab') fetchProfile();
+      if (tabId === 'servicesTab') fetchServices();
+      if (tabId === 'skillsTab') fetchSkills();
+      if (tabId === 'projectsTab') fetchProjects();
+      if (tabId === 'blogTab') fetchBlogs();
+      if (tabId === 'messagesTab') fetchMessages();
+      if (tabId === 'resumeTab') { fetchResume(); fetchTimelines(); }
+    }
+
+    function saveConfig() {
+      const url = document.getElementById('sbUrl').value.trim();
+      const key = document.getElementById('sbKey').value.trim();
+      if (!url || !key) return showStatus('Please enter both Supabase URL and Anon Key!', true);
+      localStorage.setItem('sb_url', url);
+      localStorage.setItem('sb_key', key);
+      initSupabase(url, key);
+    }
+
+    function initSupabase(url, key) {
+      try {
+        supabaseClient = window.supabase.createClient(url, key, { auth: { persistSession: false } });
+        showStatus('✅ Supabase Connected Successfully!');
+        fetchProfile();
+        fetchServices();
+        fetchSkills();
+        fetchProjects();
+        fetchBlogs();
+        fetchMessages();
+        fetchResume();
+        fetchTimelines();
+      } catch (err) {
+        showStatus('Failed to connect Supabase: ' + err.message, true);
+      }
+    }
+
+    function setLocalCache(key, val) {
+      try {
+        localStorage.setItem(key, val);
+      } catch (e) {
+        console.warn('LocalStorage quota warning:', e);
+      }
+    }
+
+    function getLocalCache(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function compressImageFile(file, maxWidth = 240, maxHeight = 240, quality = 0.75) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = new Image();
+          img.onload = function () {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+              if (width > maxWidth) {
+                height = Math.round((height * maxWidth) / width);
+                width = maxWidth;
+              }
+            } else {
+              if (height > maxHeight) {
+                width = Math.round((width * maxHeight) / height);
+                height = maxHeight;
+              }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+          };
+          img.onerror = () => resolve(e.target.result);
+          img.src = e.target.result;
+        };
+        reader.onerror = () => resolve('');
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function previewAvatar(input) {
+      if (input.files && input.files[0]) {
+        const compressedBase64 = await compressImageFile(input.files[0], 240, 240, 0.75);
+        if (compressedBase64) {
+          document.getElementById('avatarPreviewDisplay').src = compressedBase64;
+        }
+      }
+    }
+
+    function fileToBase64(file) {
+      return compressImageFile(file, 800, 800, 0.80);
+    }
+
+    // --- 1. PROFILE SETTINGS ---
+    async function fetchProfile() {
+      const cachedAvatar = getLocalCache('custom_avatar_url');
+      if (cachedAvatar) {
+        document.getElementById('avatarPreviewDisplay').src = cachedAvatar;
+      }
+      if (!supabaseClient) return;
+      const { data } = await supabaseClient.from('profile_settings').select('*').limit(1);
+      if (data && data.length > 0) {
+        const p = data[0];
+        document.getElementById('pName').value = p.name || 'Milan Boricha';
+        document.getElementById('pRole').value = p.role || 'Flutter Developer';
+        document.getElementById('pEmail').value = p.email || 'borichamilan792@gmail.com';
+        document.getElementById('pPhone').value = p.phone || '+91 8200121272';
+        document.getElementById('pLocation').value = p.location || 'Bhavnagar, Gujarat, India';
+        document.getElementById('pAbout').value = p.about_text || '';
+        if (p.avatar_url && p.avatar_url.trim() !== '') {
+          if (p.avatar_url.startsWith('data:') || p.avatar_url.startsWith('http') || !cachedAvatar) {
+            document.getElementById('avatarPreviewDisplay').src = p.avatar_url;
+            setLocalCache('custom_avatar_url', p.avatar_url);
+          }
+        }
+      }
+    }
+
+    async function uploadAvatarOnly() {
+      const avatarFile = document.getElementById('pAvatar').files[0];
+      let avatarUrl = document.getElementById('avatarPreviewDisplay').src;
+
+      if (avatarFile) {
+        showStatus('Compressing & processing profile photo...');
+        avatarUrl = await compressImageFile(avatarFile, 240, 240, 0.75);
+        document.getElementById('avatarPreviewDisplay').src = avatarUrl;
+      } else if (!avatarUrl || avatarUrl.includes('my-avatar.png')) {
+        return showStatus('Please choose an image file first!', true);
+      }
+
+      // Safe LocalStorage caching
+      setLocalCache('custom_avatar_url', avatarUrl);
+
+      if (!supabaseClient) {
+        showStatus('🎉 Profile photo saved locally!');
+        return;
+      }
+
+      try {
+        showStatus('Saving profile photo to Supabase...');
+        const { data: existingArr } = await supabaseClient.from('profile_settings').select('id').limit(1);
+        let res;
+        if (existingArr && existingArr.length > 0) {
+          res = await supabaseClient.from('profile_settings').update({ avatar_url: avatarUrl }).eq('id', existingArr[0].id);
+        } else {
+          res = await supabaseClient.from('profile_settings').insert([{ avatar_url: avatarUrl }]);
+        }
+
+        if (res && res.error) {
+          console.error('Supabase error:', res.error);
+          showStatus('Photo saved locally (Supabase warning: ' + res.error.message + ')', false);
+        } else {
+          showStatus('🎉 Profile photo saved & updated live!');
+        }
+      } catch (err) {
+        console.warn('Supabase sync warning:', err);
+        showStatus('Photo updated & saved locally!', false);
+      }
+    }
+
+    async function handleSaveProfile(e) {
+      e.preventDefault();
+      const btn = document.getElementById('saveProfileBtn');
+      btn.disabled = true;
+
+      try {
+        let existing = {};
+        if (supabaseClient) {
+          const { data: existingArr } = await supabaseClient.from('profile_settings').select('*').limit(1);
+          if (existingArr && existingArr.length > 0) existing = existingArr[0];
+        }
+
+        const avatarFile = document.getElementById('pAvatar').files[0];
+        let avatarUrl = getLocalCache('custom_avatar_url') || existing.avatar_url || document.getElementById('avatarPreviewDisplay').src;
+
+        if (avatarFile) {
+          avatarUrl = await compressImageFile(avatarFile, 240, 240, 0.75);
+          document.getElementById('avatarPreviewDisplay').src = avatarUrl;
+        }
+
+        // Save avatar locally safely
+        if (avatarUrl) setLocalCache('custom_avatar_url', avatarUrl);
+
+        const nameInput = document.getElementById('pName').value.trim();
+        const roleInput = document.getElementById('pRole').value.trim();
+        const emailInput = document.getElementById('pEmail').value.trim();
+        const phoneInput = document.getElementById('pPhone').value.trim();
+        const locationInput = document.getElementById('pLocation').value.trim();
+        const aboutInput = document.getElementById('pAbout').value.trim();
+
+        // Preserve existing values if input field is left empty by user
+        const profileObj = {
+          name: nameInput || existing.name || 'Milan Boricha',
+          role: roleInput || existing.role || 'Flutter Developer',
+          email: emailInput || existing.email || 'borichamilan792@gmail.com',
+          phone: phoneInput || existing.phone || '+91 8200121272',
+          location: locationInput || existing.location || 'Bhavnagar, Gujarat, India',
+          about_text: aboutInput || existing.about_text || '',
+          avatar_url: avatarUrl
+        };
+
+        if (supabaseClient) {
+          if (existing.id) {
+            await supabaseClient.from('profile_settings').update(profileObj).eq('id', existing.id);
+          } else {
+            await supabaseClient.from('profile_settings').insert([profileObj]);
+          }
+        }
+
+        showStatus('🎉 Profile Settings Saved Successfully!');
+      } catch (err) {
+        showStatus('Profile save notice: ' + err.message, false);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    // --- 2. SERVICES ---
+    async function fetchServices() {
+      if (!supabaseClient) return;
+      const container = document.getElementById('servicesList');
+      const { data } = await supabaseClient.from('services').select('*').order('created_at', { ascending: false });
+
+      if (!data || data.length === 0) {
+        container.innerHTML = '<p style="color:#888; font-size:13px;">No custom services added yet.</p>';
+        return;
+      }
+
+      container.innerHTML = data.map(s => `
+        <div class="item-card">
+          <div class="item-card-title">${s.icon_url || '📱'} ${s.title}</div>
+          <div class="item-card-desc">${s.description}</div>
+          <button class="btn-delete" onclick="deleteService('${s.id}')">
+            <ion-icon name="trash-outline"></ion-icon> Delete
+          </button>
+        </div>
+      `).join('');
+    }
+
+    async function handleAddService(e) {
+      e.preventDefault();
+      if (!supabaseClient) return;
+      const title = document.getElementById('sTitle').value.trim();
+      const icon = document.getElementById('sIcon').value.trim();
+      const desc = document.getElementById('sDesc').value.trim();
+
+      await supabaseClient.from('services').insert([{ title, icon_url: icon, description: desc }]);
+      showStatus('Service Card Added!');
+      document.getElementById('serviceForm').reset();
+      fetchServices();
+    }
+
+    async function deleteService(id) {
+      if (!confirm('Delete service?')) return;
+      await supabaseClient.from('services').delete().eq('id', id);
+      fetchServices();
+    }
+
+    // --- 3. SKILLS ---
+    async function fetchSkills() {
+      if (!supabaseClient) return;
+      const container = document.getElementById('skillsList');
+      const { data } = await supabaseClient.from('skills').select('*').order('created_at', { ascending: false });
+
+      if (!data || data.length === 0) {
+        container.innerHTML = '<p style="color:#888; font-size:13px;">No custom skills added yet.</p>';
+        return;
+      }
+
+      container.innerHTML = data.map(sk => `
+        <div class="item-card">
+          <div class="item-card-title">${sk.title}</div>
+          <div class="item-card-sub">Level: ${sk.percentage}%</div>
+          <button class="btn-delete" onclick="deleteSkill('${sk.id}')">
+            <ion-icon name="trash-outline"></ion-icon> Delete
+          </button>
+        </div>
+      `).join('');
+    }
+
+    async function handleAddSkill(e) {
+      e.preventDefault();
+      if (!supabaseClient) return;
+      const title = document.getElementById('skTitle').value.trim();
+      const percent = parseInt(document.getElementById('skPercent').value);
+
+      await supabaseClient.from('skills').insert([{ title, percentage: percent }]);
+      showStatus('Skill Added!');
+      document.getElementById('skillForm').reset();
+      fetchSkills();
+    }
+
+    async function deleteSkill(id) {
+      if (!confirm('Delete skill?')) return;
+      await supabaseClient.from('skills').delete().eq('id', id);
+      fetchSkills();
+    }
+
+    // --- 4. PROJECTS ---
+    async function fetchProjects() {
+      if (!supabaseClient) return;
+      const container = document.getElementById('projectsList');
+      const { data } = await supabaseClient.from('projects').select('*').order('created_at', { ascending: false });
+
+      if (!data || data.length === 0) {
+        container.innerHTML = '<p style="color:#888; font-size:13px;">No projects found.</p>';
+        return;
+      }
+
+      container.innerHTML = data.map(item => `
+        <div class="item-card">
+          <img src="${item.image_url || './assets/images/project-1.jpg'}" alt="${item.title}" onerror="this.src='./assets/images/project-1.jpg'">
+          <div class="item-card-title">${item.title}</div>
+          <div class="item-card-sub">${item.category}</div>
+          <button class="btn-delete" onclick="deleteProject('${item.id}')">
+            <ion-icon name="trash-outline"></ion-icon> Delete
+          </button>
+        </div>
+      `).join('');
+    }
+
+    async function handleAddProject(e) {
+      e.preventDefault();
+      if (!supabaseClient) return;
+
+      const submitBtn = document.getElementById('submitProjectBtn');
+      submitBtn.disabled = true;
+
+      try {
+        const title = document.getElementById('pTitle').value.trim();
+        const category = document.getElementById('pCategory').value;
+        const subtitle = document.getElementById('pSubtitle').value.trim();
+        const github = document.getElementById('pGithub').value.trim();
+        const description = document.getElementById('pDescription').value.trim();
+        const coverFile = document.getElementById('pCoverImage').files[0];
+        const screenshotFiles = document.getElementById('pScreenshots').files;
+
+        let coverUrl = './assets/images/project-1.jpg';
+        if (coverFile) coverUrl = await fileToBase64(coverFile);
+
+        const screenshotUrls = [];
+        if (screenshotFiles && screenshotFiles.length > 0) {
+          for (let i = 0; i < screenshotFiles.length; i++) {
+            const b64 = await fileToBase64(screenshotFiles[i]);
+            if (b64) screenshotUrls.push(b64);
+          }
+        } else {
+          screenshotUrls.push(coverUrl);
+        }
+
+        await supabaseClient.from('projects').insert([
+          {
+            title, category, subtitle, github, description,
+            image_url: coverUrl, screenshots: screenshotUrls
+          }
+        ]);
+
+        showStatus('🎉 Project Added Successfully!');
+        document.getElementById('projectForm').reset();
+        fetchProjects();
+      } catch (err) {
+        showStatus(err.message, true);
+      } finally {
+        submitBtn.disabled = false;
+      }
+    }
+
+    async function deleteProject(id) {
+      if (!confirm('Delete project?')) return;
+      await supabaseClient.from('projects').delete().eq('id', id);
+      fetchProjects();
+    }
+
+    // --- 5. BLOG POSTS ---
+    async function fetchBlogs() {
+      if (!supabaseClient) return;
+      const container = document.getElementById('blogsList');
+      const { data } = await supabaseClient.from('blogs').select('*').order('created_at', { ascending: false });
+
+      if (!data || data.length === 0) {
+        container.innerHTML = '<p style="color:#888; font-size:13px;">No blog posts added yet.</p>';
+        return;
+      }
+
+      container.innerHTML = data.map(b => `
+        <div class="item-card">
+          <img src="${b.image_url || './assets/images/blog-1.jpg'}" alt="${b.title}" onerror="this.src='./assets/images/blog-1.jpg'">
+          <div class="item-card-title">${b.title}</div>
+          <div class="item-card-sub">${b.category} • ${b.date || ''}</div>
+          <button class="btn-delete" onclick="deleteBlog('${b.id}')">
+            <ion-icon name="trash-outline"></ion-icon> Delete
+          </button>
+        </div>
+      `).join('');
+    }
+
+    async function handleAddBlog(e) {
+      e.preventDefault();
+      if (!supabaseClient) return;
+      const btn = document.getElementById('addBlogBtn');
+      btn.disabled = true;
+
+      try {
+        const title = document.getElementById('bTitle').value.trim();
+        const category = document.getElementById('bCategory').value.trim();
+        const date = document.getElementById('bDate').value.trim() || new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+        const content = document.getElementById('bContent').value.trim();
+        const imgFile = document.getElementById('bImage').files[0];
+
+        let imgUrl = './assets/images/blog-1.jpg';
+        if (imgFile) imgUrl = await fileToBase64(imgFile);
+
+        await supabaseClient.from('blogs').insert([{ title, category, date, content, image_url: imgUrl }]);
+        showStatus('Blog Article Published!');
+        document.getElementById('blogForm').reset();
+        fetchBlogs();
+      } catch (err) {
+        showStatus(err.message, true);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function deleteBlog(id) {
+      if (!confirm('Delete blog post?')) return;
+      await supabaseClient.from('blogs').delete().eq('id', id);
+      fetchBlogs();
+    }
+
+    // --- 6. RESUME PDF & TIMELINES MANAGER ---
+    async function fetchResume() {
+      if (!supabaseClient) return;
+      const display = document.getElementById('activeResumeDisplay');
+      const { data } = await supabaseClient.from('profile_settings').select('resume_url').limit(1);
+
+      if (data && data.length > 0 && data[0].resume_url) {
+        display.innerHTML = `Active Resume PDF: <a href="${data[0].resume_url}" target="_blank" style="color:var(--accent-gold); font-weight:600;">${data[0].resume_url}</a>`;
+        document.getElementById('resumeUrl').value = data[0].resume_url;
+      } else {
+        display.innerText = "No custom Resume uploaded yet.";
+      }
+    }
+
+    async function handleSaveResume(e) {
+      e.preventDefault();
+      if (!supabaseClient) return;
+
+      const fileInput = document.getElementById('resumeFile').files[0];
+      let linkInput = document.getElementById('resumeUrl').value.trim();
+
+      if (fileInput) linkInput = await fileToBase64(fileInput);
+      if (!linkInput) return showStatus("Please upload a PDF file or paste a link!", true);
+
+      const { data: existing } = await supabaseClient.from('profile_settings').select('id').limit(1);
+
+      if (existing && existing.length > 0) {
+        await supabaseClient.from('profile_settings').update({ resume_url: linkInput }).eq('id', existing[0].id);
+      } else {
+        await supabaseClient.from('profile_settings').insert([{ resume_url: linkInput }]);
+      }
+
+      showStatus("📄 Resume PDF Link Updated Successfully!");
+      fetchResume();
+    }
+
+    async function fetchTimelines() {
+      if (!supabaseClient) return;
+      const eduContainer = document.getElementById('eduList');
+      const expContainer = document.getElementById('expList');
+      const featProjContainer = document.getElementById('featProjList');
+      const certContainer = document.getElementById('certList');
+
+      const { data, error } = await supabaseClient.from('resume_timeline').select('*').order('created_at', { ascending: false });
+      if (error || !data) return;
+
+      const renderSection = (type) => {
+        const items = data.filter(i => i.section_type === type);
+        if (items.length === 0) return '<p style="color:#888; font-size:13px;">No entries yet.</p>';
+        return items.map(item => `
+          <div class="item-card">
+            <div class="item-card-title">${item.title}</div>
+            <div class="item-card-sub">${item.subtitle || ''} ${item.duration ? '• ' + item.duration : ''}</div>
+            <div class="item-card-desc">${item.description || ''}</div>
+            ${item.link_url ? `<a href="${item.link_url}" target="_blank" style="color:var(--accent-gold); font-size:12px;">${item.link_url}</a>` : ''}
+            <button class="btn-delete" onclick="deleteTimeline('${item.id}')">
+              <ion-icon name="trash-outline"></ion-icon> Delete
+            </button>
+          </div>
+        `).join('');
+      };
+
+      eduContainer.innerHTML = renderSection('education');
+      expContainer.innerHTML = renderSection('experience');
+      featProjContainer.innerHTML = renderSection('featured_project');
+      certContainer.innerHTML = renderSection('certification');
+    }
+
+    async function handleAddTimeline(e) {
+      e.preventDefault();
+      if (!supabaseClient) return;
+
+      const btn = document.getElementById('addTimelineBtn');
+      btn.disabled = true;
+
+      try {
+        const section_type = document.getElementById('tSection').value;
+        const title = document.getElementById('tTitle').value.trim();
+        const subtitle = document.getElementById('tSubtitle').value.trim();
+        const duration = document.getElementById('tDuration').value.trim();
+        const link_url = document.getElementById('tLink').value.trim();
+        const description = document.getElementById('tDesc').value.trim();
+
+        await supabaseClient.from('resume_timeline').insert([
+          { section_type, title, subtitle, duration, link_url, description }
+        ]);
+
+        showStatus('Timeline Entry Added Successfully!');
+        document.getElementById('timelineForm').reset();
+        fetchTimelines();
+      } catch (err) {
+        showStatus('Failed to add timeline: ' + err.message, true);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function deleteTimeline(id) {
+      if (!confirm('Delete this timeline entry?')) return;
+      await supabaseClient.from('resume_timeline').delete().eq('id', id);
+      fetchTimelines();
+    }
+
+    // --- 7. MESSAGES INBOX ---
+    async function fetchMessages() {
+      if (!supabaseClient) return;
+      const container = document.getElementById('messagesList');
+      const badge = document.getElementById('msgBadge');
+
+      const { data, error } = await supabaseClient.from('messages').select('*').order('created_at', { ascending: false });
+      if (error || !data) return;
+
+      badge.innerText = data.length;
+
+      if (data.length === 0) {
+        container.innerHTML = '<p style="color:#888; font-size:13px;">No client messages received yet.</p>';
+        return;
+      }
+
+      container.innerHTML = data.map(msg => `
+        <div style="background:var(--onyx); border:1px solid var(--card-border); padding:16px; border-radius:12px; margin-bottom:12px;">
+          <div style="display:flex; justify-space-between; align-items:center;">
+            <div>
+              <h4 style="color:#fff; font-size:15px;">${msg.name}</h4>
+              <p style="color:var(--accent-gold); font-size:12px;">${msg.email}</p>
+            </div>
+            <button class="btn-delete" onclick="deleteMessage('${msg.id}')">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+          <div style="background:#151515; padding:10px; border-radius:8px; margin-top:10px; font-size:13px; color:#ddd;">
+            ${msg.message}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function deleteMessage(id) {
+      if (!confirm('Delete message?')) return;
+      await supabaseClient.from('messages').delete().eq('id', id);
+      fetchMessages();
+    }
+  </script>
+</body>
+</html>

@@ -498,13 +498,72 @@ main {
 .about .article-title { margin-bottom: 15px; }
 
 .about-text {
-  color: var(--light-gray);
+  width: 100%;
+  color: var(--white-2);
   font-size: var(--fs-6);
-  font-weight: var(--fw-300);
-  line-height: 1.6;
+  font-weight: var(--fw-400);
+  line-height: 1.65;
+  margin-bottom: 25px;
 }
 
-.about-text p { margin-bottom: 15px; }
+.about-text p {
+  width: 100%;
+  margin-bottom: 14px;
+  color: #e0e0e0;
+  text-align: left;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
+}
+
+.about-text .about-lead {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--white-1);
+  line-height: 1.7;
+}
+
+.highlight-yellow {
+  color: var(--orange-yellow-crayola);
+  font-weight: 600;
+}
+
+.about-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+  width: 100%;
+}
+
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--border-gradient-onyx);
+  color: var(--orange-yellow-crayola);
+  border: 1px solid rgba(255, 219, 112, 0.2);
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: var(--shadow-1);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tech-chip ion-icon {
+  font-size: 15px;
+  color: var(--orange-yellow-crayola);
+}
+
+.tech-chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--orange-yellow-crayola);
+  box-shadow: 0 4px 12px rgba(255, 219, 112, 0.15);
+}
 
 
 
@@ -1385,9 +1444,31 @@ textarea.form-input::-webkit-resizer { display: none; }
    * #ABOUT
    */
 
-  .about .article-title { margin-bottom: 20px; }
+  .about-text {
+    font-size: var(--fs-5);
+    line-height: 1.75;
+    margin-bottom: 40px;
+  }
 
-  .about-text { margin-bottom: 40px; }
+  .about-text p {
+    margin-bottom: 16px;
+  }
+
+  .about-text .about-lead {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .about-tech-stack {
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .tech-chip {
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
 
   /* service */
 

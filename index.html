@@ -31,6 +31,17 @@
 
         <figure class="avatar-box" style="border-radius: 24px; overflow: hidden;">
           <img id="sidebarAvatarImage" src="./assets/images/my-avatar.png" alt="Milan Boricha" width="90" style="filter: grayscale(0.2) contrast(1.1);" onerror="this.src='./assets/images/avatar-1.png'">
+          <script>
+            (function(){
+              try {
+                var c = localStorage.getItem('custom_avatar_url');
+                if (c) {
+                  var el = document.getElementById('sidebarAvatarImage');
+                  if (el) el.src = c;
+                }
+              } catch(e){}
+            })();
+          </script>
         </figure>
 
         <div class="info-content" style="text-align: center;">
@@ -157,12 +168,24 @@
         </header>
 
         <section class="about-text" id="aboutBioText">
-          <p>
-            Flutter Developer and B.Tech Computer Engineering student with hands-on knowledge of Flutter, Dart, Firebase, SQLite, Hive, REST APIs, Provider, and BLoC. Passionate about building scalable cross-platform mobile applications and seeking a Flutter Developer Internship to apply my skills and contribute to real-world projects.
+          <p class="about-lead">
+            I am a <span class="highlight-yellow">Flutter Developer</span> & <span class="highlight-yellow">B.Tech Computer Engineering</span> student passionate about crafting high-performance, scalable cross-platform mobile applications.
           </p>
 
           <p>
-            Proven track record in delivering cutting-edge solutions, including API integration, third-party libraries, and performance optimization. Adept at debugging to ensure high-quality, responsive apps and an agile collaborator committed to staying current with industry trends.
+            Equipped with hands-on expertise in mobile app architecture, state management, and API integrations, I am actively seeking a <span class="highlight-yellow">Flutter Developer Internship</span> to deliver real-world impact and solve complex engineering challenges.
+          </p>
+
+          <div class="about-tech-stack">
+            <span class="tech-chip"><ion-icon name="phone-portrait-outline"></ion-icon> Flutter & Dart</span>
+            <span class="tech-chip"><ion-icon name="flame-outline"></ion-icon> Firebase</span>
+            <span class="tech-chip"><ion-icon name="cloud-upload-outline"></ion-icon> REST APIs</span>
+            <span class="tech-chip"><ion-icon name="layers-outline"></ion-icon> Provider & BLoC</span>
+            <span class="tech-chip"><ion-icon name="server-outline"></ion-icon> SQLite & Hive</span>
+          </div>
+
+          <p>
+            Proven track record in delivering cutting-edge solutions including seamless third-party API integration, responsive UI development, and performance optimization. Adept at debugging high-quality apps and an agile team collaborator committed to staying current with industry trends.
           </p>
         </section>
 
