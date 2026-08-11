@@ -241,8 +241,10 @@ const projectsData = {
     solution: "Structured feature modules with Firestore query indexing and local memory cache fallbacks.",
     future: "AR/VR 3D project walkthroughs, push notification lead alerts, and automated PDF quotation generator.",
     screenshots: [
-      "./assets/images/projects/primebuilder.png",
-      "./assets/images/projects/primebuilder.png"
+      "./assets/images/prime_builder/primeBuilder01.jpg",
+      "./assets/images/prime_builder/primeBuilder02.jpg",
+      "./assets/images/prime_builder/primeBuilder03.jpg",
+      "./assets/images/prime_builder/primeBuilder04.jpg"
     ]
   },
   skillpath: {
@@ -263,8 +265,7 @@ const projectsData = {
     solution: "Built robust data mappers and local cache repositories for uninterrupted offline access.",
     future: "Voice AI career coaching, automated certificate generation, and interview simulator.",
     screenshots: [
-      "./assets/images/projects/skillpath.png",
-      "./assets/images/projects/skillpath.png"
+      "./assets/images/projects/skillpath.svg"
     ]
   },
   spendnote: {
@@ -285,8 +286,11 @@ const projectsData = {
     solution: "Optimized indexed SQLite queries and computed summaries asynchronously.",
     future: "Google Drive backup/sync, PDF expense report export, and budget thresholds.",
     screenshots: [
-      "./assets/images/projects/spendnote.png",
-      "./assets/images/projects/spendnote.png"
+      "./assets/images/spendNote/Spendnote1.jpg",
+      "./assets/images/spendNote/Spendnote2.jpg",
+      "./assets/images/spendNote/Spendnote3.jpg",
+      "./assets/images/spendNote/Spendnote4.jpg",
+      "./assets/images/spendNote/Spendnote5.jpg"
     ]
   },
   invitex: {
@@ -307,8 +311,10 @@ const projectsData = {
     solution: "Designed a dual sync engine storing local chat drafts with Firestore background streaming.",
     future: "End-to-End Encryption (E2EE), voice/video calling integration, and group message search.",
     screenshots: [
-      "./assets/images/projects/invitex.png",
-      "./assets/images/projects/invitex.png"
+      "./assets/images/inviteX/invite01.jpg",
+      "./assets/images/inviteX/invite02.jpg",
+      "./assets/images/inviteX/invite03.jpg",
+      "./assets/images/inviteX/invite04.jpg"
     ]
   },
   bmi: {
@@ -328,8 +334,10 @@ const projectsData = {
     solution: "Utilized custom animated slider widgets and flex layout constraints.",
     future: "Historical health progress graphs and daily water tracking reminder.",
     screenshots: [
-      "./assets/images/projects/bmi.png",
-      "./assets/images/projects/bmi.png"
+      "./assets/images/BMI/BMI01.jpg",
+      "./assets/images/BMI/BMI02.jpg",
+      "./assets/images/BMI/BMI03.jpg",
+      "./assets/images/BMI/BMI04.jpg"
     ]
   }
 };
