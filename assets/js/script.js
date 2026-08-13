@@ -247,97 +247,26 @@ const projectsData = {
       "./assets/images/prime_builder/primeBuilder04.jpg"
     ]
   },
-  skillpath: {
-    title: "SkillPath",
-    subtitle: "AI Career Development & Learning Platform",
-    category: "AI Application • Flutter",
+  weather: {
+    title: "Weather App",
+    subtitle: "Dynamic Weather & Astronomical Tracker",
+    category: "Weather • Flutter • CustomPainter",
     featured: true,
-    github: "https://github.com/milan1533/SkillPath_App",
-    techStack: ["Flutter", "Dart", "Google Gemini API", "Hive", "REST API", "FL Chart"],
-    description: "SkillPath is an AI-powered career development platform that helps users monitor learning progress, evaluate skills, and generate personalized learning roadmaps using Google Gemini AI.",
+    github: "https://github.com/milan1533/Weather_App.git",
+    techStack: ["Flutter", "Dart", "REST API", "OpenWeatherMap", "Geolocator", "CustomPainter"],
+    description: "A real-time weather app with location-based weather tracking using REST API and Geolocator. Features dynamic rain, snow, and star animations with CustomPainter, smooth Flutter animations, and a glassmorphic UI with sun/moon trajectory and daylight tracking.",
     highlights: [
-      "Integrated Google Gemini AI API to generate customized skill roadmaps and learning paths.",
-      "Implemented Hive database for fast local offline caching of user learning progress.",
-      "Designed interactive progress charts using FL Chart for data visualization.",
-      "Collaborated in a hackathon team to build an intuitive career tracker."
+      "Developed a real-time weather app with location-based weather data using REST API and Geolocator.",
+      "Implemented dynamic rain, snow, and star animations with CustomPainter and smooth Flutter animations.",
+      "Added glassmorphic UI with sun/moon trajectory and daylight tracking."
     ],
-    challenges: "Handling real-time AI API JSON responses smoothly while synchronizing local Hive database records.",
-    solution: "Built robust data mappers and local cache repositories for uninterrupted offline access.",
-    future: "Voice AI career coaching, automated certificate generation, and interview simulator.",
+    challenges: "Rendering real-time atmospheric particle systems (rain, snow, starfield) and smooth sun/moon arc trajectories without compromising UI frame rates.",
+    solution: "Utilized Flutter CustomPainter with optimized animation controllers, repaint boundary layers, and reactive state management.",
+    future: "Hourly weather forecast graphs, multi-city saved locations dashboard, and severe weather push notifications.",
     screenshots: [
-      "./assets/images/projects/skillpath.svg"
-    ]
-  },
-  spendnote: {
-    title: "SpendNote",
-    subtitle: "Personal Expense & Notes Manager",
-    category: "Productivity • SQLite",
-    featured: false,
-    github: "https://github.com/milan1533/SpendNote_App.git",
-    techStack: ["Flutter", "Dart", "SQLite", "SharedPreferences", "Glassmorphism UI"],
-    description: "SpendNote is an offline-first Flutter application for tracking personal expenses and managing notes with categorized records, expense analytics, and SQLite database storage.",
-    highlights: [
-      "Built offline-first Flutter app for expense tracking and daily notes management.",
-      "Implemented SQLite database for local CRUD operations and rapid queries.",
-      "Designed custom glassmorphic UI elements and responsive layout widgets.",
-      "Integrated category-wise expense aggregation for simple personal finance tracking."
-    ],
-    challenges: "Computing dynamic expense totals in real-time without locking the UI main thread.",
-    solution: "Optimized indexed SQLite queries and computed summaries asynchronously.",
-    future: "Google Drive backup/sync, PDF expense report export, and budget thresholds.",
-    screenshots: [
-      "./assets/images/spendNote/Spendnote1.jpg",
-      "./assets/images/spendNote/Spendnote2.jpg",
-      "./assets/images/spendNote/Spendnote3.jpg",
-      "./assets/images/spendNote/Spendnote4.jpg",
-      "./assets/images/spendNote/Spendnote5.jpg"
-    ]
-  },
-  invitex: {
-    title: "InviteX",
-    subtitle: "Private Invite-Only Social Chat Platform",
-    category: "Real-Time Chat • Firebase",
-    featured: false,
-    github: "https://github.com/milan1533/inviteX",
-    techStack: ["Flutter", "Firebase", "Cloud Firestore", "Firebase Storage", "FCM", "SQLite", "Provider"],
-    description: "InviteX is a private invite-only real-time messaging application built with Flutter and Firebase. Features instant messaging, media sharing, offline caching via SQLite, and FCM push notifications.",
-    highlights: [
-      "Engineered real-time one-to-one messaging with Cloud Firestore sync.",
-      "Integrated Firebase Storage for media uploads and FCM for instant notifications.",
-      "Added offline data persistence using SQLite database for offline chat viewing.",
-      "Implemented Provider state management for modular chat architecture."
-    ],
-    challenges: "Maintaining chat ordering consistency between local SQLite database and Firestore during network drops.",
-    solution: "Designed a dual sync engine storing local chat drafts with Firestore background streaming.",
-    future: "End-to-End Encryption (E2EE), voice/video calling integration, and group message search.",
-    screenshots: [
-      "./assets/images/inviteX/invite01.jpg",
-      "./assets/images/inviteX/invite02.jpg",
-      "./assets/images/inviteX/invite03.jpg",
-      "./assets/images/inviteX/invite04.jpg"
-    ]
-  },
-  bmi: {
-    title: "BMI Calculator",
-    subtitle: "Health & Utility Mobile Application",
-    category: "Health • Utility",
-    featured: false,
-    github: "https://github.com/milan1533/BMI-App",
-    techStack: ["Flutter", "Dart", "Material Design"],
-    description: "A Flutter application for calculating Body Mass Index with health category classification, smooth animated transitions, and a clean Material Design interface.",
-    highlights: [
-      "Implemented precise BMI calculation formula with health classification ranges.",
-      "Designed smooth slider controls and interactive metric selection widgets.",
-      "Built clean Material 3 responsive UI layout."
-    ],
-    challenges: "Ensuring interactive input controls remain fluid across different device screen densities.",
-    solution: "Utilized custom animated slider widgets and flex layout constraints.",
-    future: "Historical health progress graphs and daily water tracking reminder.",
-    screenshots: [
-      "./assets/images/BMI/BMI01.jpg",
-      "./assets/images/BMI/BMI02.jpg",
-      "./assets/images/BMI/BMI03.jpg",
-      "./assets/images/BMI/BMI04.jpg"
+      "./assets/images/weather/weather01.jpg",
+      "./assets/images/weather/weather02.jpg",
+      "./assets/images/weather/weather03.jpg"
     ]
   }
 };
