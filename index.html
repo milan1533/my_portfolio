@@ -1011,8 +1011,13 @@
 
     slider.addEventListener('scroll', updateProgress, { passive: true });
 
-    // Mouse drag
+    // Mouse drag - Only activate on slider background, not on buttons/images
     slider.addEventListener('mousedown', function(e) {
+      // Don't activate drag if clicking on buttons, images, or links
+      if (e.target.closest('button, a, .project-media')) {
+        return;
+      }
+      
       isDown = true;
       hasDragged = false;
       slider.classList.add('dragging');
@@ -1040,13 +1045,13 @@
       slider.scrollLeft = scrollLeft - walk;
     });
 
-    // Prevent click on links/buttons if user was dragging
+    // Prevent click on links/buttons ONLY if user was dragging
     slider.addEventListener('click', function(e) {
-      if (hasDragged) {
+      if (hasDragged && !e.target.closest('button, a, .project-media')) {
         e.preventDefault();
         e.stopPropagation();
-        hasDragged = false;
       }
+      hasDragged = false;
     }, true);
 
     // Initial progress

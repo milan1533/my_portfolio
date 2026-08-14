@@ -91,6 +91,9 @@ function initCustomCursor() {
       cursorRing.classList.remove('project-hover');
       cursorDot.style.opacity = '1';
     });
+    
+    // Make sure project media click works properly
+    el.style.cursor = 'pointer';
   });
 }
 
